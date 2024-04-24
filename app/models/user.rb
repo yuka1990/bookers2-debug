@@ -35,9 +35,16 @@ def following?(user)
   following.include?(user)
 end 
 
-  
-  
-  def get_profile_image
+def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
+end
+
+def self.search_for(content, method)
+  if method == 'perfect'
+    User.where(name: content)
+  else 
+    User.where('name LIKE ?', '%' + content + '%')
   end
+end
+
 end
