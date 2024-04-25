@@ -13,6 +13,10 @@ class User < ApplicationRecord
   
   has_many :relationships_reverse, class_name:"Relationship", foreign_key: :followed_id ,dependent: :destroy
   has_many :followers, through: :relationships_reverse,source: :follower
+  
+  has_many :user_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy
+  has_many :rooms, through: :user_rooms
 
   has_one_attached :profile_image
 
