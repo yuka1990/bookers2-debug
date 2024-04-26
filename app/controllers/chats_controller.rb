@@ -13,7 +13,7 @@ class ChatsController < ApplicationController
     else
       @room = Room.new
       @room.save
-      UserRoom.create(user_id: current_use.id, room_id: @room.id)
+      UserRoom.create(user_id: current_user.id, room_id: @room.id)
       UserRoom.create(user_id: @user.id, room_id: @room.id)
     end
     
@@ -23,8 +23,9 @@ class ChatsController < ApplicationController
   
   def create
     @chat = current_user.chats.new(chat_params)
-    
-    render :validate unless @chat.save
+    unless @chat.save
+      render 'error'
+    end
   end
   
   def destroy
@@ -43,7 +44,7 @@ class ChatsController < ApplicationController
     user = User.find(params[:id])
     
     unless current_user.following?(user) && user.following?(current_user)
-      redirect_to books_path
+      redirect_to users_path
     end
   end
   
