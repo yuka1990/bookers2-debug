@@ -7,6 +7,8 @@ class BooksController < ApplicationController
     @books = @user.books
     @book_new = Book.new
     @book_comment = BookComment.new
+    read_count = ReadCount.new(book_id: @book.id, user_id: current_user.id)
+    read_count.save
   end
 
   def index
