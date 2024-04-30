@@ -25,11 +25,12 @@
 　    <tr>
 　      <td><%= @today_book.count %></td>
 　      <td><%= @yesterday_book.count %></td>
-　      <% if @yesterday_book.count ==0 %>
-　      <td>前日の投稿はなし</td>
+　      <td>
+　      <% if @yesterday_book.count == 0 %>
+　      前日の投稿はなし
 　      <% else %>
-　      <td><%= @the_day_before = @today_book.count / @yesterday_book.count %>
-　      <%= (@the_day_before * 100).round %>%</td>
+　      <% @the_day_before = @today_book.count / @yesterday_book.count.to_f %>
+　      <%= (@the_day_before * 100).round %>%
 　      <% end %>
 　      </td>
 　    </tr>
@@ -47,14 +48,38 @@
 　    <tr>
 　      <td><%= @this_week_book.count %></td>
 　      <td><%= @last_week_book.count %></td>
+　      <td>
 　      <% if @last_week_book.count == 0 %>
-　      <td>先週の投稿はなし</td>
+　      先週の投稿はなし
 　      <% else %>
-　      <td><%= @the_week_before = @this_week_book / @last_week_book.count %>
-　      <%= (@the_day_before*100).round %>%</td>
+　      <% @the_week_before = @this_week_book.count / @last_week_book.count. to_f %>
+　      <%= (@the_week_before * 100).round %>%
 　      <% end %>
+　      </td>
 　    </tr>
 　  </tbody>
+　</table>
+　
+　<h2>7日分の投稿数</h2>
+　<table class="table table-bordered">
+　  <tr>
+　    <th>6日前</th>
+　    <th>5日前</th>
+　    <th>4日前</th>
+　    <th>3日前</th>
+　    <th>2日前</th>
+　    <th>1日前</th>
+　    <th>今日</th>
+　  </tr>
+　  <tr>
+　    <td><%= @books.created_6day_ago.count %></td>
+　    <td><%= @books.created_5day_ago.count %></td>
+　    <td><%= @books.created_4day_ago.count %></td>
+　    <td><%= @books.created_3day_ago.count %></td>
+　    <td><%= @books.created_2day_ago.count %></td>
+　    <td><%= @books.created_yesterday.count %></td>
+　    <td><%= @books.created_today.count %></td>
+　  </tr>
 　</table>
 　</div>
   </div>
