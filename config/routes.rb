@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
   
   get "search" => "searches#search"
+  get 'tagsearches/search' => 'tag_searches#search'
   
   resources :chats, only: [:show, :create, :destroy]
   resources :groups, only: [:new, :index, :show, :create, :edit, :update]do

@@ -1,9 +1,9 @@
 class TagSearchesController < ApplicationController
-  
+
   def search
       @model = Book
-      @word = params[:word]
+      @word = params[:content]
       @books = Book.where("tag LIKE?","%#{@word}%")
-      render "serches/result"
+      render "tag_searches/tagsearch"
   end
 end
