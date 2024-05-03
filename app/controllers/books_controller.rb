@@ -14,7 +14,7 @@ class BooksController < ApplicationController
   def index
     @book = Book.new
     @books = Book.all.order(params[:sort])
-    
+
   end
 
   def create
@@ -50,16 +50,16 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :star)
+    params.require(:book).permit(:title, :body, :star, :tag)
   end
-  
+
   def is_matching_login_user
     book = Book.find(params[:id])
     unless book.user.id == current_user.id
       redirect_to books_path
     end
   end
-  
-  
-  
+
+
+
 end
